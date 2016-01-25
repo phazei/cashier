@@ -13,11 +13,17 @@ class CashierServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'cashier');
+        if (method_exists($this, "loadViewsFrom")) {
+            $this->loadViewsFrom(__DIR__ . '/../resources/views', 'cashier');
 
-        $this->publishes([
-            __DIR__.'/../resources/views' => base_path('resources/views/vendor/cashier'),
-        ]);
+            $this->publishes([
+                __DIR__.'/../resources/views' => base_path('resources/views/vendor/cashier'),
+            ]);
+
+        } else {
+            $this->package('laravel/cashier', null, __DIR__);
+        }
+
     }
 
     /**

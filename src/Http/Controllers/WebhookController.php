@@ -2,6 +2,7 @@
 
 namespace Laravel\Cashier\Http\Controllers;
 
+use Config;
 use Exception;
 use Illuminate\Http\Request;
 use Stripe\Event as StripeEvent;
@@ -62,7 +63,7 @@ class WebhookController extends Controller
      */
     protected function getUserByStripeId($stripeId)
     {
-        $model = getenv('STRIPE_MODEL') ?: config('services.stripe.model');
+        $model = getenv('STRIPE_MODEL') ?: Config::get('services.stripe.model');
 
         return (new $model)->where('stripe_id', $stripeId)->first();
     }
@@ -76,7 +77,7 @@ class WebhookController extends Controller
     protected function eventExistsOnStripe($id)
     {
         try {
-            return ! is_null(StripeEvent::retrieve($id, config('services.stripe.secret')));
+            return ! is_null(StripeEvent::retrieve($id, Config::get('services.stripe.secret')));
         } catch (Exception $e) {
             return false;
         }

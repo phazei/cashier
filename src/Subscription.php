@@ -2,6 +2,7 @@
 
 namespace Laravel\Cashier;
 
+use Config;
 use Carbon\Carbon;
 use LogicException;
 use Illuminate\Database\Eloquent\Model;
@@ -30,7 +31,7 @@ class Subscription extends Model
      */
     public function user()
     {
-        $model = getenv('STRIPE_MODEL') ?: config('services.stripe.model');
+        $model = getenv('STRIPE_MODEL') ?: Config::get('services.stripe.model');
 
         return $this->belongsTo($model, 'user_id');
     }

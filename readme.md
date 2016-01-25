@@ -1,4 +1,4 @@
-# Laravel Cashier
+# Laravel Cashier v6 backported to 4.2!
 
 [![Build Status](https://travis-ci.org/laravel/cashier.svg)](https://travis-ci.org/laravel/cashier)
 [![Total Downloads](https://poser.pugx.org/laravel/cashier/d/total.svg)](https://packagist.org/packages/laravel/cashier)

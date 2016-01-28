@@ -17,8 +17,12 @@ class WebhookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function handleWebhook(Request $request)
+    public function handleWebhook(Request $request = null)
     {
+        if (!$request) {
+            $request = \Request::instance();
+        }
+
         $payload = json_decode($request->getContent(), true);
 
         if (! $this->eventExistsOnStripe($payload['id']) && ! $this->isInTestingEnvironment()) {
